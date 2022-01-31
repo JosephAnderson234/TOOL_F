@@ -1,5 +1,6 @@
 import os
 import time
+import requests
 from colorama import init, Fore, Back, Style, Cursor
 
 init()
@@ -8,7 +9,6 @@ class app:
     def __init__(self):
         self.main()
         self.rute()
-            
     def main(self):
         os.system("color a")
         print("\n \n \n \n")
@@ -22,7 +22,6 @@ class app:
         print("      ||     ||   ||  ||   ||  ||     ||")
         print("      ||     \=====/  \=====/  =====  ||")
         print("***************************************************")
-        
         print("")
         print("")
         time.sleep(2)
@@ -36,7 +35,8 @@ class app:
         time.sleep(2)
     
     def test(self, drc):
-        msg = "Comprobando si existe la carpeta del proyecto"
+        msg = "Comprobando si existe la carpeta"
+        print(Fore.CYAN + "========================================================================================")
         for arc in ["[\] " + msg,"[|] " + msg,"[/] " + msg,"[-] " + msg]:
             time.sleep(1)
             print(Cursor.UP(1)+Cursor.FORWARD(20)+Fore.YELLOW+str(arc))
@@ -79,6 +79,8 @@ class app:
             print("5-Actualizar archivos en firebase")
             print("")
             print("6-Cambiar de dirección")
+            print("")
+            print("7-Instalar node.js(Revise su Escritorio)")
             try: 
                 answer = int(input(Fore.CYAN + "--->:"))
             except ValueError:
@@ -168,6 +170,19 @@ class app:
                 print(Fore.CYAN + "[+] Inserte su dirección")
                 time.sleep(2)
                 self.rute()
+            if answer == 7:
+                self.file_link = requests.get("https://nodejs.org/dist/v16.13.2/node-v16.13.2-x64.msi")
+                self.file_archive = open(os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')+"\\"+"nodeV16.13.2.msi", "wb")
+                self.file_archive.write(self.file_link.content)
+                self.file_archive.close()
+                print(Fore.GREEN + "[+] EL código y la función fueron ejecutados con éxito")
+                print("¿Quieres ir al menu?  y/n")
+                reintento = str(input("       :"))
+                if reintento == "y" or reintento ==" Y":
+                    self.seleccionardor()
+                elif reintento == "n" or reintento == "N":
+                    print("Hasta pronto")
+                    time.sleep(1)
             else:
                 print("")
                 print("")
@@ -180,4 +195,12 @@ class app:
             print("")
             print("[-] Vuelve a intentarlo")
             self.rute()
-app()
+
+try:
+    app()
+except:
+    time.sleep(2)
+    print("")
+    print("[-]Un Error a ocurrido")
+    time.sleep(2)    
+
